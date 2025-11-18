@@ -1,11 +1,9 @@
 <template>
   <div>
-    <!-- ✅ NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm sticky-top">
       <div class="container">
-        <a class="navbar-brand fw-bold text-primary" href="#">MindU</a>
+        <router-link class="navbar-brand fw-bold text-primary" to="/home">MindU</router-link>
 
-        <!-- Botón para responsive -->
         <button
           class="navbar-toggler"
           type="button"
@@ -15,88 +13,62 @@
           <span class="navbar-toggler-icon"></span>
         </button>
 
-        <!-- Enlaces -->
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav me-auto">
-            <li class="nav-item">
-              <router-link class="nav-link active" to="/">Inicio</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link class="nav-link" to="/about">Nosotros</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link class="nav-link" to="/contact">Contacto</router-link>
-            </li>
+            <li class="nav-item"><router-link class="nav-link" to="/home">Inicio</router-link></li>
+            <li class="nav-item"><router-link class="nav-link" to="/test-salud">📝 Test de Salud</router-link></li>
+            <li class="nav-item"><router-link class="nav-link" to="/meditacion">🎧 Meditación</router-link></li>
+            <li class="nav-item"><router-link class="nav-link" to="/planes">📆 Planes</router-link></li>
+            <li class="nav-item"><router-link class="nav-link" to="/especialistas">🤝 Especialistas</router-link></li>
           </ul>
 
-          <!-- Dropdown de usuario -->
           <div class="dropdown">
-            <button
-              class="btn btn-outline-primary dropdown-toggle"
-              type="button"
-              id="userMenu"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              👤 Perfil
+            <button class="btn btn-outline-primary dropdown-toggle" type="button" id="userMenu" data-bs-toggle="dropdown">
+              👤 Mi Cuenta
             </button>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
-              <li>
-                <router-link class="dropdown-item" to="/profile">Ver perfil</router-link>
-              </li>
-              <li><hr class="dropdown-divider" /></li>
-              <li>
-                <button class="dropdown-item text-danger" @click="logout">
-                  Cerrar sesión
-                </button>
-              </li>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><button class="dropdown-item text-danger" @click="logout">Cerrar sesión</button></li>
             </ul>
           </div>
         </div>
       </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="hero text-center text-white">
       <h1 class="display-4 fw-bold">Bienvenido a MindU</h1>
-      <p class="lead">Tu espacio personal para mejorar tu bienestar mental y emocional.</p>
-      <button class="btn btn-light btn-lg mt-3">Comenzar ahora</button>
+      <p class="lead">Tu espacio seguro. ¿Cómo te sientes hoy?</p>
+      <router-link to="/test-salud" class="btn btn-light btn-lg mt-3 fw-bold text-primary">
+        Realizar chequeo emocional
+      </router-link>
     </section>
 
-    <!-- Estadísticas -->
     <section class="container my-5">
-      <div class="row text-center">
-        <div class="col-md-4" v-for="(item, index) in stats" :key="index">
-          <div class="p-4 stat-card bg-white">
-            <h2>{{ item.valor }}</h2>
-            <p>{{ item.texto }}</p>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm border-0 text-center p-4 hover-card">
+            <div class="display-4 mb-3">🧘</div>
+            <h3>Zona Zen</h3>
+            <p class="text-muted">Audios guiados para reducir el estrés en minutos.</p>
+            <router-link to="/meditacion" class="btn btn-outline-primary stretched-link">Ir a Meditación</router-link>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm border-0 text-center p-4 hover-card">
+            <div class="display-4 mb-3">📊</div>
+            <h3>Evaluación</h3>
+            <p class="text-muted">Mide tu nivel de ansiedad y obtén recomendaciones.</p>
+            <router-link to="/test-salud" class="btn btn-outline-success stretched-link">Hacer Test</router-link>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm border-0 text-center p-4 hover-card">
+            <div class="display-4 mb-3">👩‍⚕️</div>
+            <h3>Ayuda Profesional</h3>
+            <p class="text-muted">Contacta con especialistas certificados.</p>
+            <router-link to="/especialistas" class="btn btn-outline-danger stretched-link">Ver Directorio</router-link>
           </div>
         </div>
       </div>
-    </section>
-
-    <!-- Funcionalidades -->
-    <section class="container my-5">
-      <h2 class="text-center mb-4">¿Qué puedes hacer en MindU?</h2>
-      <div class="row">
-        <div class="col-md-4" v-for="(item, index) in features" :key="index">
-          <div class="card shadow-sm">
-            <div class="card-body">
-              <h5 class="card-title">{{ item.icon }} {{ item.titulo }}</h5>
-              <p>{{ item.descripcion }}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Coming Soon -->
-    <section class="coming-soon text-center">
-      <h2>Próximamente en MindU</h2>
-      <p>Estamos trabajando para ofrecerte más herramientas increíbles:</p>
-      <ul class="list-unstyled">
-        <li v-for="(item, index) in comingSoon" :key="index">{{ item }}</li>
-      </ul>
     </section>
   </div>
 </template>
@@ -106,25 +78,6 @@ import { getAuth, signOut } from "firebase/auth";
 
 export default {
   name: "HomeView",
-  data() {
-    return {
-      stats: [
-        { valor: "85%", texto: "Usuarios se sienten mejor después de 7 días" },
-        { valor: "+120", texto: "Ejercicios de relajación y journaling" },
-        { valor: "24/7", texto: "Acceso a tus registros y progreso" },
-      ],
-      features: [
-        { icon: "📝", titulo: "Diario emocional", descripcion: "Registra cómo te sientes cada día." },
-        { icon: "🌬️", titulo: "Ejercicios de respiración", descripcion: "Reduce la ansiedad con respiración consciente." },
-        { icon: "📊", titulo: "Seguimiento del estado de ánimo", descripcion: "Visualiza tus emociones a lo largo del tiempo." },
-      ],
-      comingSoon: [
-        "🎧 Audios de meditación guiada",
-        "🤝 Contactos de especialistas certificados",
-        "📆 Planes personalizados de bienestar",
-      ],
-    };
-  },
   methods: {
     async logout() {
       const auth = getAuth();
@@ -141,16 +94,13 @@ export default {
 
 <style scoped>
 .hero {
-  background: linear-gradient(135deg, #8EC5FC 0%, #E0C3FC 100%);
-  padding: 100px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 80px 20px;
 }
-.stat-card {
-  border-radius: 15px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+.hover-card {
+  transition: transform 0.3s ease;
 }
-.coming-soon {
-  background-color: #f8f9fa;
-  padding: 60px 20px;
-  border-top: 1px solid #ddd;
+.hover-card:hover {
+  transform: translateY(-5px);
 }
 </style>
