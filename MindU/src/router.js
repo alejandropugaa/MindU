@@ -18,6 +18,7 @@ import PostTestView from './views/PostTestView.vue'
 import ResultadosView from './views/ResultadosView.vue'
 import AlertaCrisisView from './views/AlertaCrisisView.vue'
 import AdminBotView from './views/AdminBotView.vue'
+import GraciasView from './views/GraciasView.vue';
 
 const routes = [
   // Redirección principal
@@ -113,6 +114,7 @@ const routes = [
     // No requiere auth para acceso rápido
   },
   
+  
   // Ruta protegida - Administración
   {
     path: '/admin-bots',
@@ -125,7 +127,14 @@ const routes = [
   {
     path: '/:pathMatch(.*)*',
     redirect: '/home'
+  },
+  {
+    path: '/gracias',
+    name: 'Gracias',
+    component: GraciasView,
+    meta: { requiresAuth: true }
   }
+
 ]
 
 const router = createRouter({

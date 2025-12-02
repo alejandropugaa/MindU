@@ -1,31 +1,73 @@
 <template>
   <div class="meditation-container">
     <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
       <div class="container">
-        <router-link class="navbar-brand fw-bold text-primary" to="/home">
-          🧠 MindU
+        <router-link class="navbar-brand fw-bold text-primary d-flex align-items-center" to="/home">
+          <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="MindU Logo" class="me-2" style="width: 32px; height: 32px;">
+          <span class="brand-name">MindU</span>
         </router-link>
-        
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMeditation">
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
           <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarMeditation">
+        <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav me-auto">
             <li class="nav-item">
-              <router-link class="nav-link" to="/home">Inicio</router-link>
+              <router-link class="nav-link d-flex align-items-center" to="/home">
+                <i class="fas fa-home me-2"></i>
+                <span>Inicio</span>
+              </router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/test-salud">Test de Salud</router-link>
+              <router-link class="nav-link d-flex align-items-center" to="/pre-test">
+                <i class="fas fa-heartbeat me-2"></i>
+                <span>Test de Salud</span>
+              </router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link active" to="/meditacion">Meditación</router-link>
+              <router-link class="nav-link d-flex align-items-center" to="/meditacion">
+                <i class="fas fa-spa me-2"></i>
+                <span>Meditación</span>
+              </router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/planes">Planes</router-link>
+              <router-link class="nav-link d-flex align-items-center" to="/especialistas">
+                <i class="fas fa-user-md me-2"></i>
+                <span>Especialistas</span>
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link d-flex align-items-center" to="/dashboard">
+                <i class="fas fa-user-md me-2"></i>
+                <span>Modulos</span>
+              </router-link>
             </li>
           </ul>
+          
+
+          <div class="d-flex align-items-center gap-3">
+            <!-- CAMPANITA SIMPLIFICADA DE NOTIFICACIONES -->
+            <NotificationToggle />
+            
+            <!-- MENÚ USUARIO -->
+            <div class="dropdown">
+              <button class="btn btn-outline-primary dropdown-toggle d-flex align-items-center" type="button" id="userMenu" data-bs-toggle="dropdown">
+                <div class="avatar-placeholder me-2">
+                  <i class="fas fa-user"></i>
+                </div>
+                <span>Mi Cuenta</span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><button class="dropdown-item text-danger d-flex align-items-center" @click="logout">
+                  <i class="fas fa-sign-out-alt me-2"></i>
+                  Cerrar sesión
+                </button></li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </nav>
@@ -35,7 +77,7 @@
       <div class="container">
         <div class="row align-items-center">
           <div class="col-lg-6">
-            <h1 class="display-4 fw-bold mb-4">Zona Zen 🧘</h1>
+            <h1 class="display-4 fw-bold mb-4">Zona Zen</h1>
             <p class="lead mb-4">
               Encuentra tu paz interior con nuestras meditaciones guiadas. 
               Reduce el estrés, mejora tu concentración y cultiva la atención plena.
