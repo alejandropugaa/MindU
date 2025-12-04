@@ -146,6 +146,14 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const auth = getAuth()
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
+///
+
+const router = createRouter({
+  // 👇 AQUÍ ESTÁ EL CAMBIO IMPORTANTE
+  // Pasamos import.meta.env.BASE_URL para que tome "/MindUDeploy/"
+  history: createWebHistory(import.meta.env.BASE_URL), 
+  routes
+})
 
   // Verificar estado de autenticación
   onAuthStateChanged(auth, (user) => {
@@ -161,5 +169,7 @@ router.beforeEach((to, from, next) => {
     }
   })
 })
+
+
 
 export default router
