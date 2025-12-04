@@ -18,6 +18,7 @@ import PostTestView from './views/PostTestView.vue'
 import ResultadosView from './views/ResultadosView.vue'
 import AlertaCrisisView from './views/AlertaCrisisView.vue'
 import AdminBotView from './views/AdminBotView.vue'
+import GraciasView from './views/GraciasView.vue';
 
 const routes = [
   // Redirección principal
@@ -113,6 +114,7 @@ const routes = [
     // No requiere auth para acceso rápido
   },
   
+  
   // Ruta protegida - Administración
   {
     path: '/admin-bots',
@@ -125,7 +127,14 @@ const routes = [
   {
     path: '/:pathMatch(.*)*',
     redirect: '/home'
+  },
+  {
+    path: '/gracias',
+    name: 'Gracias',
+    component: GraciasView,
+    meta: { requiresAuth: true }
   }
+
 ]
 
 const router = createRouter({
@@ -137,6 +146,14 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const auth = getAuth()
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
+///
+
+const router = createRouter({
+  // 👇 AQUÍ ESTÁ EL CAMBIO IMPORTANTE
+  // Pasamos import.meta.env.BASE_URL para que tome "/MindUDeploy/"
+  history: createWebHistory(import.meta.env.BASE_URL), 
+  routes
+})
 
   // Verificar estado de autenticación
   onAuthStateChanged(auth, (user) => {
@@ -152,5 +169,7 @@ router.beforeEach((to, from, next) => {
     }
   })
 })
+
+
 
 export default router
